@@ -1,0 +1,15 @@
+**/node_modules/
+**/dist/
+**/es/
+**/lib/
+**/debug.log
+**/*.tgz
+.history/
+**/.history/
+build.gradle
+.gradle/
+distributions/
+build/
+**/.rollup.cache/
+gradle/*.gradle
+

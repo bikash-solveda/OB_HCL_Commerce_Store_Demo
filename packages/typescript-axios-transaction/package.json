@@ -1,0 +1,65 @@
+{
+  "name": "@hcl-commerce-store-sdk/typescript-axios-transaction",
+  "version": "9.1.16",
+  "private": true,
+  "description": "OpenAPI client for @hcl-commerce-store-sdk/typescript-axios-transaction",
+  "author": "HCL Commerce",
+  "keywords": [
+    "axios",
+    "typescript",
+    "openapi-client",
+    "openapi-generator",
+    "HCL",
+    "Commerce",
+    "@hcl-commerce-store-sdk/typescript-axios-transaction"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/es/types/index.d.ts",
+  "scripts": {
+    "build:production": "npm run clean && cross-env NODE_ENV=production rollup -c",
+    "build:dev": "rollup -c",
+    "clean": "rimraf dist",
+    "format": "prettier --write \"**/*.{js,ts}\" "
+  },
+  "peerDependencies": {
+    "axios": "*",
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.1",
+    "@babel/plugin-transform-class-properties": "^7.24.1",
+    "@babel/plugin-proposal-decorators": "^7.24.1",
+    "@babel/plugin-transform-runtime": "^7.24.1",
+    "@babel/plugin-transform-typescript": "^7.24.1",
+    "@babel/preset-env": "^7.24.1",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.1",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@types/lodash-es": "^4.17.4",
+    "@types/node": "^18.11.9",
+    "axios": "1.7.4",
+    "cross-env": "^7.0.3",
+    "find": "^0.3.0",
+    "fs-extra": "^9.1.0",
+    "is-ci": "^3.0.0",
+    "minimist": "^1.2.5",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.44.0",
+    "tslib": "^2.2.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.1"
+  }
+}
