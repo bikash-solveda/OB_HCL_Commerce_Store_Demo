@@ -87,7 +87,9 @@ const StyledHeader = styled("header")`
 
     ${theme.breakpoints.down("md")} {
       img {
-        height: 20px;
+        height: auto;
+        max-width: 150px;
+        margin-top:10px;
       }
     }
 
