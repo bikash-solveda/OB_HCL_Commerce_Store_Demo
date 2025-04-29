@@ -26,14 +26,12 @@ const StyledCardWrapper = styled(({ ...props }) => <Card {...props} />)`
 
     &.product-card {
       .MuiTypography-body2 {
-        width: 66%;
-        margin: 0 auto;
+        margin: 0 auto 10px auto;
       }
     }
     &.wishlist-card {
       .MuiTypography-body2 {
-        width: 66%;
-        margin: 0 auto;
+        margin: 0 auto 10px auto;
       }
       position:relative;
       border: 1px solid  ${theme.palette.divider};
