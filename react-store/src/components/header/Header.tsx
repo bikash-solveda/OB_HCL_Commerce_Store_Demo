@@ -240,6 +240,7 @@ const Header: React.FC<HeaderProps> = (props: any) => {
     setMiniCartPopperOpen(false);
     setMyAccountPopperOpen(false);
   };
+
   const handleLanguageTogglePopperClose = () => {
     setLanguageTogglePopperOpen(false);
   };
@@ -268,6 +269,13 @@ const Header: React.FC<HeaderProps> = (props: any) => {
         ...payloadBase,
       })
     );
+  };
+
+  const navigateToHome = () => {
+    navigate(ROUTES.HOME);
+    if (!props.loggedIn) {
+      window.location.reload();
+    }
   };
 
   const handleLogout = (event) => {
@@ -392,7 +400,7 @@ const Header: React.FC<HeaderProps> = (props: any) => {
                 </StyledGrid>
                 {mySite != null && (
                   <StyledGrid item>
-                    <div className="header-branding">
+                    <div className="header-branding" onClick={navigateToHome}>
                       {/* <ContentRecommendationWidget {...crwProps} /> */}
                       <img src={logo} alt="logo" width="213" height="68" style={{ cursor: "pointer" }} />
                     </div>
