@@ -40,7 +40,12 @@ import { SearchBar } from "../widgets/search-bar";
 import AccountPopperContent from "./AccountPopperContent";
 
 //Redux
-import { userNameSelector, loginStatusSelector, rememberMeStatusSelector } from "../../redux/selectors/user";
+import {
+  userNameSelector,
+  loginStatusSelector,
+  rememberMeStatusSelector,
+  userIdSelector,
+} from "../../redux/selectors/user";
 import { addressDetailsSelector } from "../../redux/selectors/account";
 import { ORG_SWITCH_ACTION } from "../../redux/actions/organization";
 import { CONTRACT_SWITCH_ACTION } from "../../redux/actions/contract";
@@ -185,7 +190,7 @@ const Header: React.FC<HeaderProps> = (props: any) => {
   const selectedSellers = useSelector(selectedSellersSelector);
   const sellerConfig = useSelector(sellersSelector);
   const sellers = localStorageUtil.get(SELLER_STORAGE_KEY);
-
+  const userIdSelectorData = useSelector(userIdSelector);
   const userPreviousLoggedIn = useRef();
 
   const isB2B = Boolean(mySite?.isB2B);
@@ -258,6 +263,17 @@ const Header: React.FC<HeaderProps> = (props: any) => {
     );
   };
 
+  const getContractIdForBuyerId = (mapString: string, userId: string) => {
+    const entries = mapString.split("||");
+    for (const entry of entries) {
+      const [contractId, buyerId] = entry.split(":");
+      if (buyerId === userId) {
+        return contractId; // return the matching contractId
+      }
+    }
+    return null; // not found
+  };
+
   const handleContractChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.persist();
     event.preventDefault();
@@ -300,12 +316,16 @@ const Header: React.FC<HeaderProps> = (props: any) => {
   useEffect(() => {
     console.log("userLoggedIn Header = " + userLoggedIn);
     if (mySite !== null && contractId !== undefined) {
+      const LOGIN_USER_BUYER_CONTRACT_MAP = mySite?.storeCfg?.userData?.LOGIN_USER_BUYER_CONTRACT_MAP;
+
+      const baseContarctId = getContractIdForBuyerId(LOGIN_USER_BUYER_CONTRACT_MAP, userIdSelectorData);
       const storeID: string = mySite.storeID;
+      console.log("userLoggedIn = " + userLoggedIn + "baseContarctId = " + baseContarctId);
       const parameters: any = {
         storeId: storeID,
         depthAndLimit: TOP_CATEGORIES_DEPTH_LIMIT,
         query: {
-          contractId: userLoggedIn ? contractId : "-31009",
+          contractId: userLoggedIn ? baseContarctId : "-31009",
         },
         ...payload,
       };
@@ -321,7 +341,7 @@ const Header: React.FC<HeaderProps> = (props: any) => {
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mySite, contractId, language, selectedSellers]);
+  }, [mySite, contractId, language, selectedSellers, userIdSelectorData]);
 
   useEffect(() => {
     const payloadBase: any = {

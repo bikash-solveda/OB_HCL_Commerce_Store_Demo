@@ -80,7 +80,7 @@ export function* preSelectContract(payload: any, context?: any) {
     };
 
     const getContractId = getContractIdForBuyerId(LOGIN_USER_BUYER_CONTRACT_MAP, userIdSelectorData);
-
+    console.log("entitledContracts = " + entitledContracts);
     console.log(
       "isLogin = " +
         isLogin +
@@ -94,7 +94,7 @@ export function* preSelectContract(payload: any, context?: any) {
         getContractId
     );
     //if (!isUserRemembered && isLogin && entitledContracts.length !== 1) {
-    if (isLogin) {
+    if (isLogin && getContractId) {
       //const contract = Object.keys(contracts)[0];
       console.log("If contract = " + getContractId);
       yield call(switchContractService.changeContract, {
@@ -102,15 +102,15 @@ export function* preSelectContract(payload: any, context?: any) {
         ...payload,
       });
       yield put(USER_CONTEXT_REQUEST_ACTION(payload));
-    } else {
-      //const contract = Object.keys(contracts)[0];
+    } /* else {
+
       console.log("else contract = " + contracts);
       yield call(switchContractService.changeContract, {
         query: { contractId: "-31009" },
         ...payload,
       });
       yield put(USER_CONTEXT_REQUEST_ACTION(payload));
-    }
+    }*/
   } catch (error) {
     yield put(CONTRACT_SWITCH_ERROR_ACTION(error));
   }
